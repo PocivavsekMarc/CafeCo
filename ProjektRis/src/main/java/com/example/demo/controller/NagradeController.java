@@ -22,5 +22,11 @@ public class NagradeController {
         log.info("GET nagrade z id: " + id);
         return dao.findById(id).get();
     }
+    @PostMapping
+    public Nagrada novaNagrada(@RequestBody Nagrada nagrada) {
+        log.info("Dodajanje nove nagrade " + nagrada);
+        return dao.save(nagrada);
+    }
+
 
 }
