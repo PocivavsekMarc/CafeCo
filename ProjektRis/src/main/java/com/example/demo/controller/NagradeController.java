@@ -6,6 +6,7 @@ import com.example.demo.model.Nagrada;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -28,5 +29,8 @@ public class NagradeController {
         return dao.save(nagrada);
     }
 
-
+    @GetMapping
+    public Iterable<Nagrada> getVseNagrade() {
+        return dao.findAll();
+    }
 }
