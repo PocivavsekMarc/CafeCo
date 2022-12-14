@@ -4,8 +4,12 @@ package com.example.demo.controller;
 import com.example.demo.dao.NagradaRepository;
 import com.example.demo.model.Nagrada;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -33,4 +37,29 @@ public class NagradeController {
     public Iterable<Nagrada> getVseNagrade() {
         return dao.findAll();
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Nagrada> updateNagrada(@PathVariable int id, @RequestBody Nagrada nagrada) throws Exception {
+        Nagrada updateNagrada = dao.findById(id)
+                .orElseThrow(() -> new Exception("Employee doesnt exist"));
+
+        updateNagrada.setIme(nagrada.getIme());
+        updateNagrada.setSteviloBonusTock(nagrada.getSteviloBonusTock());
+
+        dao.save(updateNagrada);
+
+        return ResponseEntity.ok(updateNagrada);
+
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteNagrada(@PathVariable int id) throws Exception {
+        Nagrada deleteNagrada = dao.findById(id)
+                .orElseThrow(() -> new Exception("Employee doesnt exist"));
+
+        dao.delete(deleteNagrada);
+
+        return ResponseEntity.ok().build();
+    }
+
 }
