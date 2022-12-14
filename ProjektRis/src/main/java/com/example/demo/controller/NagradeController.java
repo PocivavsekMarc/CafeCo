@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -36,6 +37,18 @@ public class NagradeController {
     @GetMapping
     public Iterable<Nagrada> getVseNagrade() {
         return dao.findAll();
+    }
+
+    @GetMapping("/{stBonusTock}/{dolzinaImena}")
+    public List<Nagrada> getSpecificNagrade(@PathVariable("stBonusTock") int stBonusTock, @PathVariable("dolzinaImena") int dolzinaImena) {
+        List<Nagrada> vseNagrade = (List<Nagrada>) dao.findAll();
+        List<Nagrada> KriterijList = new ArrayList<>();
+        for (Nagrada nagrada : vseNagrade) {
+            if (nagrada.getSteviloBonusTock() > stBonusTock && nagrada.getIme().length() > dolzinaImena) {
+                KriterijList.add(nagrada);
+            }
+        }
+        return KriterijList;
     }
 
     @PutMapping("{id}")
