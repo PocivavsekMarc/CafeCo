@@ -45,12 +45,10 @@ public class RegistriranUporabnikImpl implements RegistriranUporabnikService {
         if (Objects.nonNull(registriranUporabnik.getPhoneNumber()) && !"".equalsIgnoreCase(registriranUporabnik.getPhoneNumber())) {
             registriranUporabnikToUpdate.setPhoneNumber(registriranUporabnik.getPhoneNumber());
         }
-        if (registriranUporabnik.getBonusTocke() != (int)registriranUporabnik.getBonusTocke()) {
-            registriranUporabnikToUpdate.setBonusTocke(registriranUporabnik.getBonusTocke());
-        }
+        registriranUporabnikToUpdate.setBonusTocke(registriranUporabnik.getBonusTocke());
 
 
-        return (RegistriranUporabnik) dao.save(registriranUporabnik);
+        return (RegistriranUporabnik) dao.save(registriranUporabnikToUpdate);
     }
 
     //Delete
@@ -77,6 +75,7 @@ public class RegistriranUporabnikImpl implements RegistriranUporabnikService {
         return filteredUporabnikList;
     }
 
+    //pogleda ce sta dolzini imena in priimka nad podanima vrednostima
     @Override
     public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik2(int imeLength, int passwordLength) {
 
@@ -89,6 +88,7 @@ public class RegistriranUporabnikImpl implements RegistriranUporabnikService {
         }
         return filteredUporabnikList;
     }
+
 
     @Override
     public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik3(String phoneByCountry, String emailService, int stBonusTock) {

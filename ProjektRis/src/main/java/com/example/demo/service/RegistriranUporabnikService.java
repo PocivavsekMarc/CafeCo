@@ -30,7 +30,5 @@ public interface RegistriranUporabnikService {
     List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik3(String phoneByCountry, String emailService, int stBonusTock);
 
     List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik4(int imeLength, int passwordLength, int emailLength);
-//
-//    List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik5(int imeLength, int passwordLength);
 
 }

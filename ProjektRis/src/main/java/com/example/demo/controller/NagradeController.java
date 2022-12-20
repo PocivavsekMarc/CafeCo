@@ -68,6 +68,7 @@ public class NagradeController {
         int mostPoints = 0;
 
         for (RegistriranUporabnik registriranUporabnik : daoRUporabnik.findAll()) {
+
             if (registriranUporabnik.getBonusTocke() > mostPoints) {
                 mostPoints = registriranUporabnik.getBonusTocke();
             }

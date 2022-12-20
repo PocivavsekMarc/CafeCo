@@ -11,10 +11,6 @@ public class RegistriranUporabnik extends Uporabnik {
 
 	private int bonusTocke;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-
 	public RegistriranUporabnik(String uporabnisko_ime, String password, String email, String phoneNumber, int bonusTocke) {
 		super(uporabnisko_ime, password, email, phoneNumber);
 		this.bonusTocke = bonusTocke;
