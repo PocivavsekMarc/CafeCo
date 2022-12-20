@@ -35,6 +35,18 @@ public class UporabnikController {
         return registriranUporabnikService.fetchSpecificRegistriranUporabnik2(imeLength, passwordLength);
     }
 
+    @GetMapping("/r_uporabniki/3/{phoneByCountry}/{emailService}/{stBonusTock}")
+    public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik1(
+            @PathVariable("phoneByCountry") String phoneByCountry, @PathVariable("emailService") String emailService, @PathVariable("stBonusTock") int stBonusTock) {
+        return registriranUporabnikService.fetchSpecificRegistriranUporabnik3(phoneByCountry, emailService, stBonusTock);
+    }
+
+    @GetMapping("/r_uporabniki/4/{imeLength}/{passwordLength}/{emailLength}")
+    public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik2(
+            @PathVariable("imeLength") int imeLength, @PathVariable("passwordLength") int passwordLength, @PathVariable("emailLength") int emailLength) {
+        return registriranUporabnikService.fetchSpecificRegistriranUporabnik4(imeLength, passwordLength, emailLength);
+    }
+
     @PutMapping("/r_uporabniki/{id}")
     public RegistriranUporabnik updateRegistriranUporabnik (@RequestBody RegistriranUporabnik registriranUporabnik, @PathVariable("id") int id) {
         return registriranUporabnikService.updateRegistriranUporabnik(registriranUporabnik, id);

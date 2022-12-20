@@ -20,7 +20,17 @@ public interface RegistriranUporabnikService {
     //delete
     void deleteRegistriranUporabnikById(int id);
 
-    List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik1(String phoneByCountry, String emailByGmail);
+    //pogleda ce je telefonska st. iz podane drzave in mail da je gmail.
+    List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik1(String phoneByCountry, String emailService);
+
+    //ce je dolzina imena in passworda nad podano
     List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik2(int imeLength, int passwordLength);
+
+    //pogleda ce je telefonska st. iz podane drzave, mail da je gmail in ce je ima vec bonus tock kot podano.
+    List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik3(String phoneByCountry, String emailService, int stBonusTock);
+
+    List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik4(int imeLength, int passwordLength, int emailLength);
+//
+//    List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik5(int imeLength, int passwordLength);
 
 }

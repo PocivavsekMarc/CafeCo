@@ -89,4 +89,35 @@ public class RegistriranUporabnikImpl implements RegistriranUporabnikService {
         }
         return filteredUporabnikList;
     }
+
+    @Override
+    public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik3(String phoneByCountry, String emailService, int stBonusTock) {
+        String country = phoneByCountry.substring(0, 3);
+
+        List<RegistriranUporabnik> filteredUporabnikList = new ArrayList<>();
+
+        for (RegistriranUporabnik uporabnik : dao.findAll()) {
+            String email = uporabnik.getEmail();
+            //ce so prve 3 stevilke telefonske st. enake podani drzavi in ce je mail '@gmail.com' (9)
+            String uporabnikEmailService = email.substring(email.length() - 10);
+            if (uporabnik.getPhoneNumber().substring(0, 3).equals(country)
+                    && uporabnik.getEmail().substring(email.length() - 10).equals(emailService)
+                    && uporabnik.getBonusTocke() >= stBonusTock) {
+                filteredUporabnikList.add(uporabnik);
+            }
+        }
+
+        return filteredUporabnikList;
+    }
+    @Override
+    public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik4(int imeLength, int passwordLength, int emailLength) {
+        List<RegistriranUporabnik> filteredUporabnikList = new ArrayList<>();
+
+        for (RegistriranUporabnik uporabnik : dao.findAll()) {
+            if (uporabnik.getUporabnisko_ime().length() >= imeLength && uporabnik.getPassword().length() >= passwordLength && uporabnik.getEmail().length() >= emailLength) {
+                filteredUporabnikList.add(uporabnik);
+            }
+        }
+        return filteredUporabnikList;
+    }
 }
