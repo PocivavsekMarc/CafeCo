@@ -5,6 +5,7 @@ import com.example.demo.model.RegistriranUporabnik;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,5 +57,36 @@ public class RegistriranUporabnikImpl implements RegistriranUporabnikService {
     @Override
     public void deleteRegistriranUporabnikById(int id) {
         dao.deleteById(id);
+    }
+
+    @Override
+    public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik1(String phoneByCountry, String emailService) {
+        String country = phoneByCountry.substring(0, 3);
+
+        List<RegistriranUporabnik> filteredUporabnikList = new ArrayList<>();
+
+        for (RegistriranUporabnik uporabnik : dao.findAll()) {
+            String email = uporabnik.getEmail();
+            //ce so prve 3 stevilke telefonske st. enake podani drzavi in ce je mail '@gmail.com' (9)
+            String uporabnikEmailService = email.substring(email.length() - 10);
+            if (uporabnik.getPhoneNumber().substring(0, 3).equals(country) && uporabnik.getEmail().substring(email.length() - 10).equals(emailService)) {
+                filteredUporabnikList.add(uporabnik);
+            }
+        }
+
+        return filteredUporabnikList;
+    }
+
+    @Override
+    public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik2(int imeLength, int passwordLength) {
+
+        List<RegistriranUporabnik> filteredUporabnikList = new ArrayList<>();
+
+        for (RegistriranUporabnik uporabnik : dao.findAll()) {
+            if (uporabnik.getUporabnisko_ime().length() >= imeLength && uporabnik.getPassword().length() >= passwordLength) {
+                filteredUporabnikList.add(uporabnik);
+            }
+        }
+        return filteredUporabnikList;
     }
 }

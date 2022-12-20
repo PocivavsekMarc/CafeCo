@@ -1,10 +1,18 @@
 package com.example.demo.model;
 
+
+import jakarta.persistence.*;
+
+@Entity
 public abstract class Uporabnik {
 	public String uporabnisko_ime;
 	public String password;
 	public String email;
 	public String phoneNumber;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
 	public Uporabnik(String uporabnisko_ime, String password, String email, String phoneNumber) {
 		this.uporabnisko_ime = uporabnisko_ime;
@@ -47,5 +55,9 @@ public abstract class Uporabnik {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.model.RegistriranUporabnik;
 import com.example.demo.service.RegistriranUporabnikService;
-import jdk.jfr.Registered;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +21,18 @@ public class UporabnikController {
     @GetMapping("/r_uporabniki")
     public List<RegistriranUporabnik> fetchRegistriraniUporabniki() {
         return registriranUporabnikService.fetchRegistriranUporabnikList();
+    }
+
+    @GetMapping("/r_uporabniki/1/{phoneByCountry}/{emailService}")
+    public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik1(
+            @PathVariable("phoneByCountry") String phoneByCountry, @PathVariable("emailService") String emailService) {
+        return registriranUporabnikService.fetchSpecificRegistriranUporabnik1(phoneByCountry, emailService);
+    }
+
+    @GetMapping("/r_uporabniki/2/{imeLength}/{passwordLength}")
+    public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik2(
+            @PathVariable("imeLength") int imeLength, @PathVariable("passwordLength") int passwordLength) {
+        return registriranUporabnikService.fetchSpecificRegistriranUporabnik2(imeLength, passwordLength);
     }
 
     @PutMapping("/r_uporabniki/{id}")

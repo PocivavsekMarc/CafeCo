@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Nagrada;
 import com.example.demo.model.RegistriranUporabnik;
 import org.springframework.stereotype.Component;
 
@@ -20,5 +19,8 @@ public interface RegistriranUporabnikService {
 
     //delete
     void deleteRegistriranUporabnikById(int id);
+
+    List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik1(String phoneByCountry, String emailByGmail);
+    List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik2(int imeLength, int passwordLength);
 
 }
