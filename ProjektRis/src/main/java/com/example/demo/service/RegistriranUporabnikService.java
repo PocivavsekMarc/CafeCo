@@ -31,4 +31,5 @@ public interface RegistriranUporabnikService {
 
     List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik4(int imeLength, int passwordLength, int emailLength);
 
+    RegistriranUporabnik findByEmail(String email);
 }

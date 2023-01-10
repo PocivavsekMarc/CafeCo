@@ -1,11 +1,15 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.RegistriranUporabnikRepository;
+import com.example.demo.dao.RoleRepository;
 import com.example.demo.model.RegistriranUporabnik;
+import com.example.demo.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,10 +19,30 @@ public class RegistriranUporabnikImpl implements RegistriranUporabnikService {
     @Autowired
     RegistriranUporabnikRepository dao;
 
+    private RegistriranUporabnikRepository registriranUporabnikRepository;
+    private RoleRepository roleRepository;
+    private PasswordEncoder passwordEncoder;
+
+    public RegistriranUporabnikImpl(RegistriranUporabnikRepository registriranUporabnikRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.registriranUporabnikRepository = registriranUporabnikRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
 
     //Create
     @Override
     public RegistriranUporabnik saveRegistriranUporabnik(RegistriranUporabnik registriranUporabnik) {
+        RegistriranUporabnik user = new RegistriranUporabnik();
+        user.setUporabnisko_ime(registriranUporabnik.getUporabnisko_ime());
+        user.setEmail(registriranUporabnik.getEmail());
+        user.setPassword(passwordEncoder.encode(registriranUporabnik.getPassword()));
+
+        Role role = roleRepository.findByName("ROLE_ADMIN");
+        if(role == null){
+            role = checkRoleExist();
+        }
+        user.setRoles(Arrays.asList(role));
         return (RegistriranUporabnik) dao.save(registriranUporabnik);
     }
 
@@ -120,4 +144,16 @@ public class RegistriranUporabnikImpl implements RegistriranUporabnikService {
         }
         return filteredUporabnikList;
     }
+
+    @Override
+    public RegistriranUporabnik findByEmail(String email) {
+        return registriranUporabnikRepository.findByEmail(email);
+    }
+
+    private Role checkRoleExist(){
+        Role role = new Role();
+        role.setName("ROLE_ADMIN");
+        return roleRepository.save(role);
+    }
+
 }
