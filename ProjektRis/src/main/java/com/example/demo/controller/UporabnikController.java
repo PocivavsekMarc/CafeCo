@@ -18,10 +18,10 @@ public class UporabnikController {
         return registriranUporabnikService.saveRegistriranUporabnik(registriranUporabnik);
     }
 
-    @GetMapping("/r_uporabniki")
-    public List<RegistriranUporabnik> fetchRegistriraniUporabniki() {
-        return registriranUporabnikService.fetchRegistriranUporabnikList();
-    }
+//    @GetMapping("/r_uporabniki")
+//    public List<RegistriranUporabnik> fetchRegistriraniUporabniki() {
+//        return registriranUporabnikService.fetchRegistriranUporabnikList();
+//    }
 
     @GetMapping("/r_uporabniki/1/{phoneByCountry}/{emailService}")
     public List<RegistriranUporabnik> fetchSpecificRegistriranUporabnik1(

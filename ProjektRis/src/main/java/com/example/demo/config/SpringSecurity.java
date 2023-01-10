@@ -29,6 +29,9 @@ public class SpringSecurity {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
+                                .requestMatchers("/sendMail").permitAll()
+                                .requestMatchers("/sendMailWithAttachment").permitAll()
+                                .requestMatchers("/info").permitAll()
                                 .requestMatchers("/index").permitAll()
                                 .requestMatchers("/users").permitAll()
                 ).formLogin(
